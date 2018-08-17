@@ -1,10 +1,10 @@
 <template>
     <b-jumbotron>
       <template slot="header">
-        <h2>{{title}}</h2>
+        <h2>{{this.$store.state.sitedetail.title}}</h2>
       </template>
       <template slot="lead">
-        {{msg}}
+        {{this.$store.state.sitedetail.header_text}}
       </template>
     </b-jumbotron>
 </template>
@@ -12,11 +12,10 @@
 <script>
 export default {
   name: 'jumbotron',
-  data () {
-    return {
-      title: 'SDice技術メモ',
-      msg: '技術備忘録や仕事関連でやったこと'
-    }
+  mounted () {
+      this.$store.dispatch('getSitedetail').then((res)=>{
+        this.$store.commit('setSitedetail', res.data[0])
+    })
   }
 }
 </script>

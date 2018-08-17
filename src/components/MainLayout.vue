@@ -7,7 +7,7 @@
 
   <div class="row">
     <main class="col-12 col-md-8 ">
-      <listcard />
+      <postlist />
     </main>
 
     <!-- 右側のサイドバー -->
@@ -15,11 +15,15 @@
 
       <!-- カテゴリ一覧 -->
       <categorylist />
+
       <!-- タグ一覧 -->
+      <taglist />
 
       <!-- リンク一覧 -->
+      <linklist />
 
-       <!-- コメント一覧 -->
+      <!-- コメント一覧 -->
+      <commentlist />
 
       <!-- 広告一覧 -->
     </aside>
@@ -34,11 +38,15 @@
 
 <script>
 import listheader from './ListHeader.vue';
-import listcard from './ListCard.vue';
+import postlist from './PostList.vue';
+
 import categorylist from './CategoryList.vue';
+import taglist from './TagList.vue';
+import linklist from './LinkList.vue';
+import commentlist from './CommentList.vue';
 
 export default {
   name: 'MainLayout',
-  components: { listheader, listcard, categorylist },
+  components: { listheader, postlist, categorylist, taglist, linklist, commentlist },
 }
 </script>
