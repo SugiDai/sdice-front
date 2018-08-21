@@ -10,16 +10,26 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'categorylist',
   data () {
     return {
       mysite: {color:"info"},
-      categories: [{
-        name:"category-1",
-        num_posts:1,
-      }],
+      categories: [],
     }
-  }
+  },
+  mounted () {
+    axios
+      .get('http://localhost:8000/api/category/',{})
+      .then((res)=>{
+        this.categories = res.data
+      })
+      .catch((res)=>{
+        console.log(res)
+      });
+  },
+
 }
 </script>

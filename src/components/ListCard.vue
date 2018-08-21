@@ -34,8 +34,7 @@
         </span>
       </div>
       <hr>
-
-      <a class="btn btn-outline-primary btn-lg btn-block" v-bind:href="post.pk">続きを読む</a>
+      <router-link :to="{ name:'post', params : { id: post.pk } }" class="btn btn-outline-primary btn-lg btn-block" > 続きを読む</router-link>
       <br>
 
       <div v-if="user.is_authenticated">

@@ -15,25 +15,25 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'taglist',
   data () {
     return {
-      tags: [
-      {
-        name:"Python",
-        num_posts:10,
-      },
-      {
-        name:"Django",
-        num_posts:100,
-      },
-      {
-        name:"BootStrap",
-        num_posts:10,
-      },
-      ],
+      tags: []
     }
-  }
+  },
+  mounted () {
+    axios
+      .get('http://localhost:8000/api/tag/',{})
+      .then((res)=>{
+        this.tags = res.data
+      })
+      .catch((res)=>{
+        console.log(res)
+      });
+  },
+
 }
 </script>

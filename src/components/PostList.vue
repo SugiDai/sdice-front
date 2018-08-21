@@ -20,13 +20,12 @@ export default {
   name: 'taglist',
   data () {
     return {
-      mysite:{ title:"マイサイトタイトル",  description:"マイサイトの説明", color:"primary"} ,
       post_list: [],
     }
   },
   mounted () {
     axios
-      .get('http://localhost:8000/api/post',{})
+      .get('http://localhost:8000/api/baselist',{})
       .then((res)=>{
         this.post_list = res.data
       })

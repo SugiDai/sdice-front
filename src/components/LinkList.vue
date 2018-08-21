@@ -1,6 +1,7 @@
 <template>
   <div class="list-group my-5">
-    <a href="#" class="list-group-item text-white bg-primary">
+    <a href="#" class="list-group-item text-white"
+    　　　v-bind:class="getColor">
       Link
     </a>
     <div v-for="link in links">
@@ -12,17 +13,30 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'linklist',
   data () {
     return {
-      links: [
-      {
-        name:"link1",
-        adrs:"aaaa",
-      },
-      ],
+      links: [],
     }
-  }
+  },
+  computed: {
+    getColor () {
+      return "bg-" + this.$store.getters.sitedetail.color
+    }
+  },
+  mounted () {
+    axios
+      .get('http://localhost:8000/api/link/',{})
+      .then((res)=>{
+        this.links = res.data
+      })
+      .catch((res)=>{
+        console.log(res)
+      });
+  },
+
 }
 </script>
