@@ -57,12 +57,6 @@ export default {
     }
   },
   computed: {
-    getBgColor() {
-      return "bg-" + this.$store.getters.sitedetail.color
-    },
-    getBadgeColor() {
-      return "badge-" + this.$store.getters.sitedetail.color
-    }
   },
   mounted () {
     axios

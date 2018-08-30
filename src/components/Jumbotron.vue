@@ -14,7 +14,6 @@ export default {
   name: 'jumbotron',
   mounted () {
       this.$store.dispatch('getSitedetail').then((res)=>{
-        res.data[0].color =   "bg-" + res.data[0].color
         this.$store.commit('setSitedetail', res.data[0])
     })
   }

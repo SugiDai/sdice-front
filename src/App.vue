@@ -6,7 +6,7 @@
         <!-- <b-navbar-brand href="#">Home</b-navbar-brand> -->
         <b-collapse is-nav id="nav_collapse">
           <b-navbar-nav>
-            <b-nav-item href="#">Home</b-nav-item>
+            <b-nav-item href="/">Home</b-nav-item>
             <b-nav-item href="#">All Tag</b-nav-item>
             <b-nav-item href="#">Feed</b-nav-item>
           </b-navbar-nav>

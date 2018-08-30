@@ -1,14 +1,33 @@
 <template>
     <div>
     <!-- 目次部分 -->
+    <div class="text-center font-weight-bold h4">目次</div>
     <div id="toc"></div>
 
-    <article>
-    <!-- 記事詳細部分 -->
-    </article>
+    <div class="card">
+        <div class="card-header" v-bind:class="getBgColor">
+          <h1 class="card-title text-white">{{ post.title }}</h1>
+        </div>
+        <div class="card-body">
+            <span class="badge badge-pill" v-bind:class="getBadgeColor" >{{ post.created_at }}</span>
+            <span class="badge badge-pill" v-bind:class="getBadgeColor" >{{ post.created_at }}</span>
+
+            <br>
+            <span class="badge badge-primary">
+              <a class="text-white" href="#">{{ this.category.name }}</a>
+            </span>
+
+
+            <hr>
+            <article class="markdown-body">
+                <!-- 記事詳細部分 -->
+                <vuemarkdown :source="post.text" :toc="toc" toc-id="toc" toc-anchor-link-symbol=">"></vuemarkdown>
+            </article>
+
+        </div>
+    </div>
 
     <div id="comment-area">
-    <p>{{post.title}}</p>
     <!-- コメント一覧 -->
     </div>
 
@@ -23,19 +42,24 @@
 import listcard from './ListCard.vue';
 import page from './Page.vue';
 import axios from 'axios';
-
+import vuemarkdown from 'vue-markdown'
 
 export default {
   name: 'taglist',
   props: { id: Number },
   data () {
     return {
-      post: [],
+      post: {},
+      category: {},
+      toc:true
     }
   },
   computed: {
-    getBgColor () {
-      return "bg-" + this.$store.getters.sitedetail.color
+    getBadgeColor() {
+        return "badge-" + this.$store.getters.sitedetail.color ;
+    },
+    getBgColor() {
+        return "bg-" + this.$store.getters.sitedetail.color ;
     }
   },
   mounted () {
@@ -44,11 +68,28 @@ export default {
       .get('http://localhost:8000/api/post/' + this.$route.params.id, {} )
       .then((res)=>{
         this.post = res.data
+        this.category = res.data.category
       })
       .catch((res)=>{
         console.log(res)
       });
   },
-  components: { listcard, page },
+  components: { listcard, page, vuemarkdown },
 }
 </script>
+
+<style>
+	.markdown-body {
+		box-sizing: border-box;
+		min-width: 200px;
+		max-width: 980px;
+		margin: 0 auto;
+		padding: 45px;
+	}
+
+	@media (max-width: 767px) {
+		.markdown-body {
+			padding: 15px;
+		}
+	}
+</style>
