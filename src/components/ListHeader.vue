@@ -1,6 +1,6 @@
 <template>
   <div class="col-12 col-md-12">
-    <b-alert variant="primary" show> {{ title }} </b-alert>
+    <b-alert variant="primary" show> {{ this.$store.state.listtitle }} </b-alert>
   </div>
 </template>
 
@@ -12,6 +12,6 @@ export default {
     return {
         msg:"duammy",
     }
-  }
+  },
 }
 </script>

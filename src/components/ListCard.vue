@@ -19,8 +19,8 @@
 
     <!-- card-bodyの右側 -->
     <div class="col-xs-12 col-sm-6">
-      <span class="badge badge-primary badge-pill">{{ post.created_at }}</span>
-      <span class="badge badge-primary badge-pill">{{ post.created_at }}</span>
+      <span class="badge badge-primary badge-pill">{{ post.days_since_joined }}</span>
+      <span class="badge badge-primary badge-pill">{{ getCreatedAtStr }}</span>
       <br>
 
       <span class="badge badge-primary">
@@ -58,6 +58,16 @@ export default {
       mysite:{ title:"マイサイトタイトル",  description:"マイサイトの説明"} ,
       user:{ is_authenticated:true} ,
       card_items: [],
+    }
+  },
+  computed: {
+    getCreatedAtStr:function(){
+      var dt = new Date(Date.parse(this.post.created_at));
+      var y = dt.getFullYear();
+      var m = ("00" + (dt.getMonth()+1)).slice(-2);
+      var d = ("00" + dt.getDate()).slice(-2);
+      var result = y + "年" + m + "月" + d  + "日";
+      return result;
     }
   },
   mounted () {

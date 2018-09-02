@@ -9,8 +9,8 @@
           <h1 class="card-title text-white">{{ post.title }}</h1>
         </div>
         <div class="card-body">
-            <span class="badge badge-pill" v-bind:class="getBadgeColor" >{{ post.created_at }}</span>
-            <span class="badge badge-pill" v-bind:class="getBadgeColor" >{{ post.created_at }}</span>
+            <span class="badge badge-pill" v-bind:class="getBadgeColor" >{{ post.days_since_joined }}</span>
+            <span class="badge badge-pill" v-bind:class="getBadgeColor" >{{ getCreatedAtStr }}</span>
 
             <br>
             <span class="badge badge-primary">
@@ -55,6 +55,14 @@ export default {
     }
   },
   computed: {
+    getCreatedAtStr:function(){
+      var dt = new Date(Date.parse(this.post.created_at));
+      var y = dt.getFullYear();
+      var m = ("00" + (dt.getMonth()+1)).slice(-2);
+      var d = ("00" + dt.getDate()).slice(-2);
+      var result = y + "年" + m + "月" + d  + "日";
+      return result;
+    },
     getBadgeColor() {
         return "badge-" + this.$store.getters.sitedetail.color ;
     },

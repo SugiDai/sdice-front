@@ -18,14 +18,25 @@ Vue.config.productionTip = false
 const store = new Vuex.Store({
   state: {
     // 単純なテキストデータ
-    sitedetail: '初期メッセージ'
+    sitedetail: '初期メッセージ',
+
+    // 単純なテキストデータ
+    listtitle: '一覧',
   },
+
   mutations: {
     // メッセージの書き換え
     setSitedetail(state, payload) {
       state.sitedetail = payload
-    }
+    },
+
+    // 一覧タイトルの書き換え
+    setListTitle(state, payload) {
+      state.listtitle = payload
+    },
+
   },
+
   actions: {
     // メッセージを API からGET
     getSitedetail({dispatch}) {
@@ -42,8 +53,12 @@ const store = new Vuex.Store({
   },
   getters: {
     // message をそのまま使用
-    sitedetail(state) { return state.sitedetail }
+    sitedetail(state) { return state.sitedetail },
+
+    // message をそのまま使用
+    listtitle(state) { return state.listtitle },
   }
+
 })
 
 /* eslint-disable no-new */
