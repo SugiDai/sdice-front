@@ -1,7 +1,7 @@
 <template>
 <div class="mb-5 card">
 
-  <div class="card-header bg-primary">
+  <div class="card-header" v-bind:class="getBgColor">
     <h1 class="card-title text-white">{{ post.title }}</h1>
   </div><!-- card-header終了 -->
 
@@ -14,22 +14,22 @@
       <div v-else>
         <img class="img-fluid lazy" data-original="/static/blog/img/noimage.png" b-bind:alt="post.title">
       </div>
-      <div>{{this.$store.state.sitedetail.header_text}}</div>
+      <div>DAMMMI</div>
     </div><!-- card-bodyの左側終わり -->
 
     <!-- card-bodyの右側 -->
     <div class="col-xs-12 col-sm-6">
-      <span class="badge badge-primary badge-pill">{{ post.days_since_joined }}</span>
-      <span class="badge badge-primary badge-pill">{{ getCreatedAtStr }}</span>
+      <span class="badge badge-pill" v-bind:class="getBadgeColor">{{ post.days_since_joined }}</span>
+      <span class="badge badge-pill" v-bind:class="getBadgeColor">{{ getCreatedAtStr }}</span>
       <br>
 
-      <span class="badge badge-primary">
+      <span class="badge" v-bind:class="getBadgeColor">
         <a class="text-white" b-bind:href="post.category.name">{{ post.category.name }}</a>
       </span>
       <br>
 
-      <div v-for="tag in post.tag.all">
-        <span class="badge badge-primary">
+      <div v-for="tag in post.tag.all" v-bind:key="tag.id">
+        <span class="badge" v-bind:class="getBadgeColor">
           <a class="text-white" v-bind:href="tag.name">{{ tag.name }}</a>
         </span>
       </div>
@@ -61,6 +61,12 @@ export default {
     }
   },
   computed: {
+    getBadgeColor () {
+      return "badge-" + this.$store.getters.sitecolor
+    },
+    getBgColor () {
+      return "bg-" + this.$store.getters.sitecolor
+    },
     getCreatedAtStr:function(){
       var dt = new Date(Date.parse(this.post.created_at));
       var y = dt.getFullYear();
@@ -71,8 +77,8 @@ export default {
     }
   },
   mounted () {
-      this.$store.dispatch('getSitedetail').then((res)=>{
-        this.$store.commit('setSitedetail', res.data[0])
+    this.$store.dispatch('getSiteDetail').then((res)=>{
+      this.$store.commit('setSiteDetail', res.data[0])
     })
   }
 }

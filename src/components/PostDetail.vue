@@ -13,7 +13,7 @@
             <span class="badge badge-pill" v-bind:class="getBadgeColor" >{{ getCreatedAtStr }}</span>
 
             <br>
-            <span class="badge badge-primary">
+            <span class="badge" v-bind:class="getBadgeColor">
               <a class="text-white" href="#">{{ this.category.name }}</a>
             </span>
 
@@ -55,6 +55,7 @@ export default {
     }
   },
   computed: {
+
     getCreatedAtStr:function(){
       var dt = new Date(Date.parse(this.post.created_at));
       var y = dt.getFullYear();
@@ -63,23 +64,23 @@ export default {
       var result = y + "年" + m + "月" + d  + "日";
       return result;
     },
-    getBadgeColor() {
-        return "badge-" + this.$store.getters.sitedetail.color ;
+    getBadgeColor () {
+      return "badge-" + this.$store.getters.sitecolor
     },
-    getBgColor() {
-        return "bg-" + this.$store.getters.sitedetail.color ;
-    }
+    getBgColor () {
+      return "bg-" + this.$store.getters.sitecolor
+    },
   },
   mounted () {
-    console.log(this.$route)
     axios
       .get('http://localhost:8000/api/post/' + this.$route.params.id, {} )
       .then((res)=>{
-        this.post = res.data
-        this.category = res.data.category
+        this.post = res.data;
+        this.category = res.data.category;
+        this.$store.commit('setListTitle', "/ 一覧 / " + this.category.name + "/" + res.data.title );
       })
       .catch((res)=>{
-        console.log(res)
+        console.log(res);
       });
   },
   components: { listcard, page, vuemarkdown },

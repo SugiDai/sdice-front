@@ -1,13 +1,12 @@
 <template>
   <div class="list-group my-5">
-    <a href="#" class="list-group-item text-white"
-    　　　v-bind:class="getColor">
+    <a href="#" class="list-group-item text-white" v-bind:class="getColor">
       Link
     </a>
-    <div v-for="link in links">
-    <a class="list-group-item" v-bind:href="link.adrs" target="_blank" rel="nofollow">
-      {{ link.name }}
-    </a>
+    <div v-for="link in links" v-bind:key="link.id">
+      <a class="list-group-item" v-bind:href="link.adrs" target="_blank" rel="nofollow">
+        {{ link.name }}
+      </a>
     </div>
   </div>
 </template>
@@ -24,18 +23,19 @@ export default {
   },
   computed: {
     getColor () {
-      return "bg-" + this.$store.getters.sitedetail.color
+      return "bg-" + this.$store.getters.sitecolor
     }
   },
   mounted () {
     axios
       .get('http://localhost:8000/api/link/',{})
       .then((res)=>{
-        this.links = res.data
+        this.links = res.data.results
       })
       .catch((res)=>{
         console.log(res)
       });
+    this.$store.commit('setListTitle', "/ 一覧 " );
   },
 
 }

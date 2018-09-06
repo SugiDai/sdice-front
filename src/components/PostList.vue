@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div v-for="post in post_list">
+  <div v-for="post in post_list" v-bind:key="post.id">
     <article>
       <listcard v-bind:post="post"/>
     </article>
@@ -25,7 +25,7 @@ export default {
   },
   mounted () {
     axios
-      .get('http://localhost:8000/api/baselist',{})
+      .get('http://localhost:8000/api/post',{})
       .then((res)=>{
         this.post_list = res.data
       })

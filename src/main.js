@@ -17,16 +17,28 @@ Vue.config.productionTip = false
 
 const store = new Vuex.Store({
   state: {
-    // 単純なテキストデータ
-    sitedetail: '初期メッセージ',
-
-    // 単純なテキストデータ
+    title:'',
+    header_text:'',
+    color:'',
+    sitedetail: {},
     listtitle: '一覧',
   },
-
   mutations: {
     // メッセージの書き換え
-    setSitedetail(state, payload) {
+    setTitle(state, payload) {
+      state.title = payload
+    },
+    // メッセージの書き換え
+    setHeaderText(state, payload) {
+      state.header_text = payload
+    },
+    // メッセージの書き換え
+    setColor(state, payload) {
+      state.color = payload
+    },
+
+    // メッセージの書き換え
+    setSiteDetail(state, payload) {
       state.sitedetail = payload
     },
 
@@ -39,7 +51,7 @@ const store = new Vuex.Store({
 
   actions: {
     // メッセージを API からGET
-    getSitedetail({dispatch}) {
+    getSiteDetail({dispatch}) {
         return axios.get('http://localhost:8000/api/sitedetaile/',{})
         // .then(function(res){
         //   store.commit('setSitedetail', res.data )
@@ -54,6 +66,9 @@ const store = new Vuex.Store({
   getters: {
     // message をそのまま使用
     sitedetail(state) { return state.sitedetail },
+
+    // message をそのまま使用
+    sitecolor(state) { return state.color },
 
     // message をそのまま使用
     listtitle(state) { return state.listtitle },

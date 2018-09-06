@@ -1,10 +1,10 @@
 <template>
     <b-jumbotron>
       <template slot="header">
-        <h2>{{this.$store.state.sitedetail.title}}</h2>
+        <h2>{{this.$store.state.title}}</h2>
       </template>
       <template slot="lead">
-        {{this.$store.state.sitedetail.header_text}}
+        {{this.$store.state.header_text}}
       </template>
     </b-jumbotron>
 </template>
@@ -13,8 +13,11 @@
 export default {
   name: 'jumbotron',
   mounted () {
-      this.$store.dispatch('getSitedetail').then((res)=>{
-        this.$store.commit('setSitedetail', res.data[0])
+    this.$store.dispatch('getSiteDetail').then((res)=>{
+      this.$store.commit('setSiteDetail', res.data.results[0])
+      this.$store.commit('setTitle', res.data.results[0].title)
+      this.$store.commit('setHeaderText', res.data.results[0].header_text)
+      this.$store.commit('setColor', res.data.results[0].color)
     })
   }
 }
