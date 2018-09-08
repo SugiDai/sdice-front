@@ -17,13 +17,27 @@ Vue.config.productionTip = false
 
 const store = new Vuex.Store({
   state: {
+    domain:'',
+    name:'',
     title:'',
     header_text:'',
     color:'',
+    author:'',
+    author_mail:'',
     sitedetail: {},
     listtitle: '一覧',
   },
   mutations: {
+    setDomain(state, payload) {
+      state.domain = payload
+    },
+    setName(state, payload) {
+      state.name = payload
+    },
+
+
+
+
     // メッセージの書き換え
     setTitle(state, payload) {
       state.title = payload
@@ -38,6 +52,17 @@ const store = new Vuex.Store({
     },
 
     // メッセージの書き換え
+    setAuthor(state, payload) {
+      state.author = payload
+    },
+
+    // メッセージの書き換え
+    setAuthorMail(state, payload) {
+      state.author_mail = payload
+    },
+
+
+    // メッセージの書き換え
     setSiteDetail(state, payload) {
       state.sitedetail = payload
     },
@@ -50,6 +75,10 @@ const store = new Vuex.Store({
   },
 
   actions: {
+    getSite({dispatch}) {
+      return axios.get('http://localhost:8000/api/site',{})
+     },
+
     // メッセージを API からGET
     getSiteDetail({dispatch}) {
         return axios.get('http://localhost:8000/api/sitedetaile/',{})
@@ -64,14 +93,16 @@ const store = new Vuex.Store({
     // },
   },
   getters: {
+    domain(state) { return state.domain },
+    name(state) { return state.name },
+
     // message をそのまま使用
     sitedetail(state) { return state.sitedetail },
-
-    // message をそのまま使用
     sitecolor(state) { return state.color },
-
-    // message をそのまま使用
     listtitle(state) { return state.listtitle },
+    author(state) { return state.author },
+    authormail(state) { return state.author_mail },
+
   }
 
 })

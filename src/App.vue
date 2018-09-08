@@ -30,6 +30,21 @@
 
 export default {
   name: 'app',
+  beforeCreate () {
+    this.$store.dispatch('getSite').then((res)=>{
+      this.$store.commit('setDomain', res.data.results[0].domain)
+      this.$store.commit('setName', res.data.results[0].name)
+    })
+
+    this.$store.dispatch('getSiteDetail').then((res)=>{
+      this.$store.commit('setSiteDetail', res.data.results[0])
+      this.$store.commit('setTitle', res.data.results[0].title)
+      this.$store.commit('setHeaderText', res.data.results[0].header_text)
+      this.$store.commit('setColor', res.data.results[0].color)
+      this.$store.commit('setAuthor', res.data.results[0].author)
+      this.$store.commit('setAuthorMail', res.data.results[0].author_mail)
+    })
+  }
 }
 </script>
 

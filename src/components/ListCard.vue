@@ -8,13 +8,12 @@
   <div class="card-body row">
     <!-- card-bodyの左側 -->
     <div class="col-xs-12 col-sm-6 text-center">
-      <div v-if="post.thumnail" >
-        <a v-bind:href=" post.thumnail.url " target="_blank" rel="nofollow"><img class="img-fluid lazy" b-bind:data-original="post.thumnail.url" b-bind:alt=" post.title "></a>
+      <div v-if="post.thumnail">
+        <b-img thumbnail fluid v-bind:src="getThumnail" v-bind:alt="post.title" />
       </div>
       <div v-else>
-        <img class="img-fluid lazy" data-original="/static/blog/img/noimage.png" b-bind:alt="post.title">
+        <b-img src="./static/sdice_logo.svg" fluid-grow alt="post.title" />
       </div>
-      <div>DAMMMI</div>
     </div><!-- card-bodyの左側終わり -->
 
     <!-- card-bodyの右側 -->
@@ -61,6 +60,10 @@ export default {
     }
   },
   computed: {
+    getThumnail () {
+      return "http://" + this.$store.getters.domain + this.post.thumnail
+    },
+
     getBadgeColor () {
       return "badge-" + this.$store.getters.sitecolor
     },

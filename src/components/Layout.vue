@@ -1,40 +1,42 @@
 <template>
 <div>
-    <jumbotron></jumbotron>
-    <div class="container">
+  <jumbotron></jumbotron>
+  <div class="container">
+    <div class="row">
+      <listheader title="記事一覧" />
+    </div>
 
-      <div class="row">
-        <listheader title="記事一覧" />
-      </div>
+    <div class="row">
+      <main class="col-12 col-md-8 ">
+        <router-view/>
+      </main>
 
-      <div class="row">
-        <main class="col-12 col-md-8 ">
-          <router-view/>
-        </main>
+      <!-- 右側のサイドバー -->
+      <aside class="col-12 col-md-3 offset-md-1 ">
+        <!-- カテゴリ一覧 -->
+        <categorylist />
 
-        <!-- 右側のサイドバー -->
-        <aside class="col-12 col-md-3 offset-md-1 ">
+        <!-- タグ一覧 -->
+        <taglist />
 
-          <!-- カテゴリ一覧 -->
-          <categorylist />
+        <!-- リンク一覧 -->
+        <linklist />
 
-          <!-- タグ一覧 -->
-          <taglist />
+        <!-- コメント一覧 -->
+        <commentlist />
 
-          <!-- リンク一覧 -->
-          <linklist />
-
-          <!-- コメント一覧 -->
-          <commentlist />
-
-          <!-- 広告一覧 -->
-        </aside>
-      </div>
-
-      <!-- 人気記事一覧 -->
-      <aside>
+        <!-- 広告一覧 -->
       </aside>
     </div>
+    <!-- 人気記事一覧 -->
+    <aside>
+    </aside>
+
+
+
+  </div>
+  <authfooter></authfooter>
+
 </div>
 </template>
 
@@ -46,9 +48,10 @@ import categorylist from './CategoryList.vue';
 import taglist from './TagList.vue';
 import linklist from './LinkList.vue';
 import commentlist from './CommentList.vue';
+import authfooter from './Footer.vue';
 
 export default {
   name: 'layout',
-  components: { jumbotron, listheader, categorylist, taglist, linklist, commentlist },
+  components: { jumbotron, listheader, categorylist, taglist, linklist, commentlist ,authfooter},
 }
 </script>

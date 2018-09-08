@@ -12,14 +12,6 @@
 <script>
 export default {
   name: 'jumbotron',
-  mounted () {
-    this.$store.dispatch('getSiteDetail').then((res)=>{
-      this.$store.commit('setSiteDetail', res.data.results[0])
-      this.$store.commit('setTitle', res.data.results[0].title)
-      this.$store.commit('setHeaderText', res.data.results[0].header_text)
-      this.$store.commit('setColor', res.data.results[0].color)
-    })
-  }
 }
 </script>
 

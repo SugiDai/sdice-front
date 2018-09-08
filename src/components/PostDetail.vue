@@ -1,30 +1,37 @@
 <template>
     <div>
     <!-- 目次部分 -->
-    <div class="text-center font-weight-bold h4">目次</div>
-    <div id="toc"></div>
+    <div class="card">
+      <div class="text-center font-weight-bold h4">目次</div>
+      <div id="toc"></div>
+    </div>
 
     <div class="card">
         <div class="card-header" v-bind:class="getBgColor">
           <h1 class="card-title text-white">{{ post.title }}</h1>
         </div>
         <div class="card-body">
-            <span class="badge badge-pill" v-bind:class="getBadgeColor" >{{ post.days_since_joined }}</span>
-            <span class="badge badge-pill" v-bind:class="getBadgeColor" >{{ getCreatedAtStr }}</span>
+          <span class="badge badge-pill" v-bind:class="getBadgeColor" >{{ post.days_since_joined }}</span>
+          <span class="badge badge-pill" v-bind:class="getBadgeColor" >{{ getCreatedAtStr }}</span>
 
-            <br>
-            <span class="badge" v-bind:class="getBadgeColor">
-              <a class="text-white" href="#">{{ this.category.name }}</a>
-            </span>
+          <br>
+          <span class="badge" v-bind:class="getBadgeColor">
+            <a class="text-white" href="#">{{ this.category.name }}</a>
+          </span>
 
-
-            <hr>
-            <article class="markdown-body">
-                <!-- 記事詳細部分 -->
-                <vuemarkdown :source="post.text" :toc="toc" toc-id="toc" toc-anchor-link-symbol=">"></vuemarkdown>
-            </article>
-
+          <hr>
+          <article class="markdown-body">
+              <!-- 記事詳細部分 -->
+              <vuemarkdown :source="post.text" :toc="toc" toc-id="toc" toc-anchor-link-symbol=">"></vuemarkdown>
+          </article>
         </div>
+        <div class="card-footer">
+          <p>添付ファイル</p>
+          <div v-for="file in post.files" v-bind:key=" file.id">
+            <a href="">{{ file.title }} - {{ file.get_filename }}</a><br>
+          </div>
+        </div>        
+        
     </div>
 
     <div id="comment-area">
