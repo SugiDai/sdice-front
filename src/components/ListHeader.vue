@@ -1,6 +1,6 @@
 <template>
   <div class="col-12 col-md-12">
-    <b-alert variant="primary" show> {{ this.$store.state.listtitle }} </b-alert>
+    <b-alert v-bind:variant="this.$store.getters.color" show> {{ this.$store.state.listtitle }} </b-alert>
   </div>
 </template>
 

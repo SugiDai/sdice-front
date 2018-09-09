@@ -27,51 +27,34 @@ const store = new Vuex.Store({
     sitedetail: {},
     listtitle: '一覧',
   },
-  mutations: {
+  mutations: {    
     setDomain(state, payload) {
       state.domain = payload
     },
     setName(state, payload) {
       state.name = payload
     },
-
-
-
-
-    // メッセージの書き換え
     setTitle(state, payload) {
       state.title = payload
     },
-    // メッセージの書き換え
     setHeaderText(state, payload) {
       state.header_text = payload
     },
-    // メッセージの書き換え
     setColor(state, payload) {
       state.color = payload
     },
-
-    // メッセージの書き換え
     setAuthor(state, payload) {
       state.author = payload
     },
-
-    // メッセージの書き換え
     setAuthorMail(state, payload) {
       state.author_mail = payload
     },
-
-
-    // メッセージの書き換え
     setSiteDetail(state, payload) {
       state.sitedetail = payload
     },
-
-    // 一覧タイトルの書き換え
     setListTitle(state, payload) {
       state.listtitle = payload
     },
-
   },
 
   actions: {
@@ -95,14 +78,13 @@ const store = new Vuex.Store({
   getters: {
     domain(state) { return state.domain },
     name(state) { return state.name },
-
-    // message をそのまま使用
     sitedetail(state) { return state.sitedetail },
     sitecolor(state) { return state.color },
     listtitle(state) { return state.listtitle },
     author(state) { return state.author },
     authormail(state) { return state.author_mail },
-
+    bgcolor(state) { return  "bg-" + state.color },
+    badgecolor(state) { return  "badge-" + state.color },
   }
 
 })

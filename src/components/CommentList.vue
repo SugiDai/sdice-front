@@ -1,6 +1,6 @@
 <template>
   <div class="hidden-sm-down list-group my-5">
-    <a href="#" class="list-group-item text-white" v-bind:class="getBgColor">
+    <a href="#" class="list-group-item text-white" v-bind:class="this.$store.getters.bgcolor">
     Comment
   </a>
   <a v-for="comment in comments" v-bind:key="comment.id" class="list-group-item" href="#comment-area" rel="nofollow">
@@ -21,13 +21,11 @@ export default {
     }
   },
   computed: {
-    getBadgeColor () {
-      return "badge-" + this.$store.getters.sitecolor
-    },
-    getBgColor () {
-      return "bg-" + this.$store.getters.sitecolor
-    },
-  },  
+    getBadgeColor:function(){
+      return this.$store.getters.badgecolor;
+    }
+  },
+
   mounted () {
     axios
       .get('http://localhost:8000/api/comment/',{})

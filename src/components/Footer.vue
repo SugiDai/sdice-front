@@ -1,10 +1,10 @@
 <template>
-    <footer class="text-center" v-bind:class="getBgColor" >
+    <footer class="text-center" v-bind:class="this.$store.getters.bgcolor" >
         <div class="container">
             <p class="text-white">Copyright {{ this.$store.getters.author }} All Rights Reserved.</p>
             <p><a v-bind:href="getAuthorMailHref" rel="nofollow">{{ this.$store.getters.authormail }}</a></p>
         </div>
-    </footer>    
+    </footer>
 </template>
 
 
@@ -19,12 +19,6 @@ export default {
   computed: {
     getAuthorMailHref () {
       return "mailto:-" + this.$store.getters.authormail
-    },
-    getBadgeColor () {
-      return "badge-" + this.$store.getters.sitecolor
-    },
-    getBgColor () {
-      return "bg-" + this.$store.getters.sitecolor
     },
   },  
   

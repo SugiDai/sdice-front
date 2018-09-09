@@ -1,6 +1,6 @@
 <template>
   <div class="list-group my-5">
-    <a href="#" class="list-group-item text-white" v-bind:class="getColor">
+    <a href="#" class="list-group-item text-white" v-bind:class="this.$store.getters.bgcolor">
       Link
     </a>
     <div v-for="link in links" v-bind:key="link.id">
@@ -19,11 +19,6 @@ export default {
   data () {
     return {
       links: [],
-    }
-  },
-  computed: {
-    getColor () {
-      return "bg-" + this.$store.getters.sitecolor
     }
   },
   mounted () {

@@ -1,6 +1,6 @@
 <template>
   <div class="list-group mt-5">
-    <a href="#" class="list-group-item text-white" v-bind:class="getBgColor">
+    <a href="#" class="list-group-item text-white" v-bind:class="this.$store.getters.bgcolor">
     Tag
   </a>
   <div v-for="tag in tags" v-bind:key="tag.id">
@@ -25,12 +25,9 @@ export default {
     }
   },
   computed: {
-    getBadgeColor () {
-      return "badge-" + this.$store.getters.sitecolor
-    },
-    getBgColor () {
-      return "bg-" + this.$store.getters.sitecolor
-    },
+    getBadgeColor:function(){
+      return this.$store.getters.badgecolor;
+    }
   },
   mounted () {
     axios

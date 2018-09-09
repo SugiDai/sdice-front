@@ -1,7 +1,7 @@
 <template>
 <div class="mb-5 card">
 
-  <div class="card-header" v-bind:class="getBgColor">
+  <div class="card-header" v-bind:class="this.$store.getters.bgcolor">
     <h1 class="card-title text-white">{{ post.title }}</h1>
   </div><!-- card-header終了 -->
 
@@ -18,20 +18,21 @@
 
     <!-- card-bodyの右側 -->
     <div class="col-xs-12 col-sm-6">
-      <span class="badge badge-pill" v-bind:class="getBadgeColor">{{ post.days_since_joined }}</span>
-      <span class="badge badge-pill" v-bind:class="getBadgeColor">{{ getCreatedAtStr }}</span>
+      <span class="badge badge-pill" v-bind:class="this.$store.getters.badgecolor">{{ post.days_since_joined }}</span>
+      <span class="badge badge-pill" v-bind:class="this.$store.getters.badgecolor">{{ getCreatedAtStr }}</span>
       <br>
 
-      <span class="badge" v-bind:class="getBadgeColor">
+      <span class="badge" v-bind:class="this.$store.getters.badgecolor">
         <a class="text-white" b-bind:href="post.category.name">{{ post.category.name }}</a>
       </span>
       <br>
 
-      <div v-for="tag in post.tag.all" v-bind:key="tag.id">
+      <div class='tag-blox' v-for="item in post.tag" v-bind:key="item">
         <span class="badge" v-bind:class="getBadgeColor">
-          <a class="text-white" v-bind:href="tag.name">{{ tag.name }}</a>
+          <a class="text-white" v-bind:href="item">{{ item }}</a>
         </span>
       </div>
+      <br>
       <hr>
       <router-link :to="{ name:'post', params : { id: post.pk } }" class="btn btn-outline-primary btn-lg btn-block" > 続きを読む</router-link>
       <br>
@@ -44,45 +45,46 @@
   </div><!-- card-body終了 -->
 
 </div>
-
-
 </template>
 
 <script>
+import mixin from "../mixin";
+
 export default {
-  name: 'listcard',
-  props: ['post'],
-  data () {
+  name: "listcard",
+  props: ["post"],
+  mixins: [mixin],
+
+  data() {
     return {
-      mysite:{ title:"マイサイトタイトル",  description:"マイサイトの説明"} ,
-      user:{ is_authenticated:true} ,
-      card_items: [],
-    }
+      mysite: { title: "マイサイトタイトル", description: "マイサイトの説明" },
+      user: { is_authenticated: true },
+      card_items: []
+    };
   },
   computed: {
-    getThumnail () {
-      return "http://" + this.$store.getters.domain + this.post.thumnail
+    getBadgeColor:function(){
+      return this.$store.getters.badgecolor;
     },
-
-    getBadgeColor () {
-      return "badge-" + this.$store.getters.sitecolor
+    getThumnail() {
+      return "http://" + this.$store.getters.domain + this.post.thumnail;
     },
-    getBgColor () {
-      return "bg-" + this.$store.getters.sitecolor
-    },
-    getCreatedAtStr:function(){
+    getCreatedAtStr: function() {
+      console.log(this.post)
       var dt = new Date(Date.parse(this.post.created_at));
       var y = dt.getFullYear();
-      var m = ("00" + (dt.getMonth()+1)).slice(-2);
+      var m = ("00" + (dt.getMonth() + 1)).slice(-2);
       var d = ("00" + dt.getDate()).slice(-2);
-      var result = y + "年" + m + "月" + d  + "日";
+      var result = y + "年" + m + "月" + d + "日";
       return result;
     }
   },
-  mounted () {
-    this.$store.dispatch('getSiteDetail').then((res)=>{
-      this.$store.commit('setSiteDetail', res.data[0])
-    })
-  }
-}
+};
 </script>
+
+<style>
+  .tag-blox {
+    padding:1px;
+    float: left;
+  }
+</style>
