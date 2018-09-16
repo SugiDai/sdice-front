@@ -1,12 +1,14 @@
 <template>
-    <b-jumbotron>
-      <template slot="header">
-        <h2>{{this.$store.state.title}}</h2>
-      </template>
-      <template slot="lead">
-        {{this.$store.state.header_text}}
-      </template>
-    </b-jumbotron>
+  <b-jumbotron>
+    <template slot="header">
+      <h2>{{this.$store.state.title}}</h2>
+    </template>
+    <hr class="my-4">
+    <template slot="lead">
+      {{this.$store.state.header_text}}
+    </template>
+    <p></p>
+  </b-jumbotron>
 </template>
 
 <script>

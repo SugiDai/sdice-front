@@ -12,7 +12,7 @@
         <b-img thumbnail fluid v-bind:src="getThumnail" v-bind:alt="post.title" />
       </div>
       <div v-else>
-        <b-img src="./static/sdice_logo.svg" fluid-grow alt="post.title" />
+        <b-img src="./static/no_image.svg" fluid-grow alt="post.title" />
       </div>
     </div><!-- card-bodyの左側終わり -->
 
@@ -70,7 +70,6 @@ export default {
       return "http://" + this.$store.getters.domain + this.post.thumnail;
     },
     getCreatedAtStr: function() {
-      console.log(this.post)
       var dt = new Date(Date.parse(this.post.created_at));
       var y = dt.getFullYear();
       var m = ("00" + (dt.getMonth() + 1)).slice(-2);

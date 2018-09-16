@@ -41,7 +41,7 @@
     </div>
 
     <div id="comment-area">
-    <!-- コメント一覧 -->
+      <detailcomment v-bind:comments="post.comments"></detailcomment>
     </div>
 
     <div class="text-center my-5">
@@ -55,6 +55,7 @@
 import listcard from './ListCard.vue';
 import page from './Page.vue';
 import axios from 'axios';
+import detailcomment from './DetailComment.vue';
 import vuemarkdown from 'vue-markdown'
 
 export default {
@@ -84,7 +85,7 @@ export default {
   methods:{
     getfile:function(id_list){
       id_list.forEach(id => {
-        axios.get('http://localhost:8000/api/file/'+id, {} )
+        axios.get('http://localhost:8000/api/file/' + id, {} )
           .then((res)=>{
             var data = res.data;
             var src = res.data.src;
@@ -96,7 +97,7 @@ export default {
   },
   mounted () {
     axios
-      .get('http://localhost:8000/api/post/' + this.$route.params.id, {} )
+      .get('http://' + this.$store.getters.domain + '/api/post/' + this.$route.params.id, {} )
       .then((res)=>{
         this.post = res.data;
         this.category = res.data.category;
@@ -106,7 +107,7 @@ export default {
         console.log(res);
       });
   },
-  components: { listcard, page, vuemarkdown },
+  components: { listcard, page, vuemarkdown, detailcomment },
 }
 </script>
 

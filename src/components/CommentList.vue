@@ -25,14 +25,12 @@ export default {
       return this.$store.getters.badgecolor;
     }
   },
-
   mounted () {
     axios
       .get('http://localhost:8000/api/comment/',{})
       .then((res)=>{
         this.comments = res.data.results
-      })
-      .catch((res)=>{
+      }).catch((res)=>{
         console.log(res)
       });
   },
