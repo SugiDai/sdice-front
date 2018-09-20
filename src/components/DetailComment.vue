@@ -3,10 +3,10 @@
     <div v-for="comment in comments" v-bind:key="comment.id">
       <div class="row mt-3">
         <div v-if="comment.icon" class="col-md-2 d-none d-md-block">
-            <b-img thumbnail fluid class="img-fluid lazy" v-bind:src="getIcon" alt="" />
+            <b-img thumbnail fluid class="img-fluid lazy" v-bind:src="getImageUrl(comment.icon)" v-bind:alt="comment.name" />
         </div>
         <div v-else class="col-md-2 d-none d-md-block">
-            <b-img src="./static/no_image.svg" fluid-grow alt="" />
+            <b-img thumbnail fluid class="img-fluid lazy" src="./static/no_image.svg" v-bind:alt="comment.name" />
         </div>
         <div class="col-md-10">
             <h5>
@@ -38,6 +38,9 @@ export default {
     };
   },
   methods:{
+    getImageUrl: function(page){
+      return "http://" + this.$store.getters.domain + page;
+    },
     getCreatedAtStr: function(created_at) {
       var dt = new Date(Date.parse(created_at));
       var y = dt.getFullYear();
@@ -50,9 +53,6 @@ export default {
   computed: {
     getBadgeColor:function(){
       return this.$store.getters.badgecolor;
-    },
-    getIcon() {
-      return "http://" + this.$store.getters.domain + this.comment.icon;
     },
   },
   components: { recomment },

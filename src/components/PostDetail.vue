@@ -45,8 +45,7 @@
     </div>
 
     <div class="text-center my-5">
-      <!-- コメント一覧 -->
-      <a href="#" rel="nofollow" class="btn btn-lg text-white" v-bind:class="this.$store.getters.bgcolor" >コメントページへ</a>
+      <router-link :to="{ name:'commentform', params:{ 'id':post.pk }}" class="btn btn-lg text-white" v-bind:class="this.$store.getters.bgcolor" >コメントページへ</router-link>
     </div>
 </div>
 </template>
@@ -63,6 +62,7 @@ export default {
   props: { id: Number },
   data () {
     return {
+      commentform:[],
       post: {},
       category: {},
       toc:true,

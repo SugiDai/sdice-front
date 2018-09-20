@@ -11,28 +11,27 @@
 </template>
 
 <script>
-import listcard from './ListCard.vue';
-import page from './Page.vue';
-import axios from 'axios';
-
+import listcard from "./ListCard.vue";
+import page from "./Page.vue";
+import axios from "axios";
 
 export default {
-  name: 'taglist',
-  data () {
+  name: "taglist",
+  data() {
     return {
-      post_list: [],
-    }
+      post_list: []
+    };
   },
-  mounted () {
+  mounted() {
     axios
-      .get('http://localhost:8000/api/post',{})
-      .then((res)=>{
-        this.post_list = res.data
+      .get("http://localhost:8000/api/post", {})
+      .then(res => {
+        this.post_list = res.data;
       })
-      .catch((res)=>{
-        console.log(res)
+      .catch(res => {
+        console.log(res);
       });
   },
-  components: { listcard, page },
-}
+  components: { listcard, page }
+};
 </script>

@@ -10,31 +10,30 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  name: 'categorylist',
-  data () {
+  name: "categorylist",
+  data() {
     return {
-      mysite: {color:"info"},
-      categories: [],
-    }
+      mysite: { color: "info" },
+      categories: []
+    };
   },
   computed: {
-    getBadgeColor:function(){
+    getBadgeColor: function() {
       return this.$store.getters.badgecolor;
     }
   },
-  mounted () {
+  mounted() {
     axios
-      .get('http://localhost:8000/api/category/',{})
-      .then((res)=>{
-        this.categories = res.data.results
+      .get("http://localhost:8000/api/category/", {})
+      .then(res => {
+        this.categories = res.data.results;
       })
-      .catch((res)=>{
-        console.log(res)
+      .catch(res => {
+        console.log(res);
       });
-  },
-
-}
+  }
+};
 </script>

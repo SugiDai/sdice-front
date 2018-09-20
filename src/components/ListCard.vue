@@ -63,7 +63,7 @@ export default {
     };
   },
   computed: {
-    getBadgeColor:function(){
+    getBadgeColor: function() {
       return this.$store.getters.badgecolor;
     },
     getThumnail() {
@@ -77,13 +77,13 @@ export default {
       var result = y + "年" + m + "月" + d + "日";
       return result;
     }
-  },
+  }
 };
 </script>
 
 <style>
-  .tag-blox {
-    padding:1px;
-    float: left;
-  }
+.tag-blox {
+  padding: 1px;
+  float: left;
+}
 </style>

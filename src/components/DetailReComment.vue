@@ -3,7 +3,7 @@
     <div v-for="recomment in recomments" v-bind:key="recomment.id">
       <div class="row mt-3">
         <div v-if="recomment.icon" class="col-md-2 d-none d-md-block">
-            <b-img thumbnail fluid class="img-fluid lazy" v-bind:src="getIcon" alt="" />
+            <b-img thumbnail fluid class="img-fluid lazy" v-bind:src="getImageUrl(recomment.icon)" alt="" />
         </div>
         <div v-else class="col-md-2 d-none d-md-block">
             <b-img src="./static/no_image.svg" fluid-grow alt="" />
@@ -24,25 +24,35 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
   name: "listcard",
   props: ["commentid"],
   data() {
     return {
-      recomments:[],
+      recomments: []
     };
   },
-  mounted () {
+  mounted() {
     axios
-      .get("http://" + this.$store.getters.domain + '/api/recomment/?comment=' + this.commentid, {} )
-      .then((res)=>{
+      .get(
+        "http://" +
+          this.$store.getters.domain +
+          "/api/recomment/?comment=" +
+          this.commentid,
+        {}
+      )
+      .then(res => {
         this.recomments = res.data;
-      }).catch((res)=>{
+      })
+      .catch(res => {
         console.log(res);
       });
   },
-  methods:{
+  methods: {
+    getImageUrl: function(page){
+      return "http://" + this.$store.getters.domain + page;
+    },
     getCreatedAtStr: function(created_at) {
       var dt = new Date(Date.parse(created_at));
       var y = dt.getFullYear();
@@ -53,12 +63,12 @@ export default {
     }
   },
   computed: {
-    getBadgeColor:function(){
+    getBadgeColor: function() {
       return this.$store.getters.badgecolor;
     },
     getIcon() {
       return "http://" + this.$store.getters.domain + this.recomment.icon;
-    },
-  },
+    }
+  }
 };
 </script>
