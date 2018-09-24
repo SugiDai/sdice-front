@@ -22,15 +22,27 @@ export default {
       post_list: []
     };
   },
+  methods: {
+    feachItems(keyword){
+      const params = {params: { keyword : keyword }};
+      axios
+        .get('http://' + this.$store.getters.domain + '/api/post/', params )
+        .then((res)=>{
+          this.post_list = res.data;
+          console.log(this.post_list);
+          // this.$store.commit('setListTitle', "/ 一覧 / " + this.category.name + "/" + res.data.title );
+        }).catch((res)=>{
+          console.log(res);
+        });
+    }
+  },
+  watch: {
+      '$route.query.keyword' () {
+          this.feachItems(this.$route.query.keyword);
+      }
+  },
   mounted() {
-    axios
-      .get("http://localhost:8000/api/post", {})
-      .then(res => {
-        this.post_list = res.data;
-      })
-      .catch(res => {
-        console.log(res);
-      });
+    this.feachItems(this.$route.query.keyword);
   },
   components: { listcard, page }
 };

@@ -4,41 +4,38 @@
     Tag
   </a>
   <div v-for="tag in tags" v-bind:key="tag.id">
-  <a class="list-group-item" href="#">
-      {{ tag.name }}<span class="badge badge-pill float-right text-white" v-bind:class="getBadgeColor">{{ tag.num_posts }}</span>
-  </a>
+  <router-link :to="{ name:'top' ,  query: { keyword :tag.name }  }" class="list-group-item" >
+    {{ tag.name }}<span class="badge badge-pill float-right text-white" v-bind:class="getBadgeColor">{{ tag.num_posts }}</span>
+  </router-link>
   </div>
-  <a href="#" class="list-group-item">
-    >>> 全てのタグを見る
-  </a>
+  <router-link :to="{ name:'tagtable' }" class="list-group-item" > >>> 全てのタグを見る </router-link>
 </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  name: 'taglist',
-  data () {
+  name: "taglist",
+  data() {
     return {
       tags: []
-    }
+    };
   },
   computed: {
-    getBadgeColor:function(){
+    getBadgeColor: function() {
       return this.$store.getters.badgecolor;
     }
   },
-  mounted () {
+  mounted() {
     axios
-      .get('http://localhost:8000/api/tag/',{})
-      .then((res)=>{
-        this.tags = res.data.results
+      .get("http://" + this.$store.getters.domain + "/api/tag/", {})
+      .then(res => {
+        this.tags = res.data.results;
       })
-      .catch((res)=>{
-        console.log(res)
+      .catch(res => {
+        console.log(res);
       });
-  },
-
-}
+  }
+};
 </script>

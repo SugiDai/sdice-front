@@ -13,7 +13,7 @@
               {{ comment.name }}
               <span class="badge badge-pill" v-bind:class="getBadgeColor" >{{ comment.days_since_joined}}</span>
               <span class="badge badge-pill" v-bind:class="getBadgeColor" >{{ getCreatedAtStr(comment.created_at)}}</span>
-              <router-link :to="{ name:'commentform', params:{ id:comment.id} }" >返信する</router-link>
+              <router-link :to="{ name:'recommentform', query:{ postid:comment.target, commentid:comment.id } }" >返信する</router-link>
             </h5>
             <div v-for="file in comment.files" v-bind:key="file.pk">
               <a href="#">添付ファイルダウンロード()</a><br>

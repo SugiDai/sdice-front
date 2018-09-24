@@ -10,24 +10,27 @@ import 'babel-polyfill'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'github-markdown-css/github-markdown.css'
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(BootstrapVue)
 Vue.use(Vuex)
 Vue.config.productionTip = false
 
+const initialState = {
+  domain:'',
+  name:'',
+  title:'',
+  header_text:'',
+  color:'',
+  author:'',
+  author_mail:'',
+  sitedetail: {},
+  listtitle: '一覧',
+}
+
 const store = new Vuex.Store({
-  state: {
-    domain:'',
-    name:'',
-    title:'',
-    header_text:'',
-    color:'',
-    author:'',
-    author_mail:'',
-    sitedetail: {},
-    listtitle: '一覧',
-  },
-  mutations: {    
+  state: initialState,
+  mutations: {
     setDomain(state, payload) {
       state.domain = payload
     },
@@ -85,15 +88,16 @@ const store = new Vuex.Store({
     authormail(state) { return state.author_mail },
     bgcolor(state) { return  "bg-" + state.color },
     badgecolor(state) { return  "badge-" + state.color },
-  }
-
+  },
+  plugins: [createPersistedState({key: 'sdice-front'})]
 })
 
 /* eslint-disable no-new */
-new Vue({
+const vue = new Vue({
   store: store,
   el: '#app',
   router,
   components: { App },
   template: '<App/>'
-})
+});
+vue.$forceUpdate();

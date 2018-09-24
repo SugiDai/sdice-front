@@ -38,8 +38,8 @@
 <script>
 import axios from 'axios';
 export default {
-  name: 'commentform',
-  props: { id: Number },
+  name: 'recommentform',
+  props: { commentid: Number, postid: Number },
   data () {
     return {
       form: {
@@ -53,16 +53,17 @@ export default {
   methods: {
     onSubmit (evt) {
       evt.preventDefault();
-      let post_id = this.$route.params.id;
+      let comment_id = this.$route.query.commentid;
+      let post_id = this.$route.query.postid;
       let data = new FormData;
-      data.append('target', post_id);
+      data.append('target', comment_id);
       data.append('name', this.form.name);
       data.append('text', this.form.text);
       if( this.form.icon != null ){
         data.append('icon', this.form.icon);
       }
-      axios.post('http://' + this.$store.getters.domain + '/api/comment/', data).then((res)=>{
-        alert("Add Comment.");
+      axios.post('http://' + this.$store.getters.domain + '/api/recomment/', data).then((res)=>{
+        alert("Add ReComment .");
         this.$router.push({ name: 'post', params: { id: post_id }});
       });
     },
