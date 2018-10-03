@@ -3,9 +3,11 @@
     <a href="#" class="list-group-item text-white" v-bind:class="this.$store.getters.bgcolor">
       All Category
     </a>
-    <a v-for="category in categories" v-bind:key="category.id" class="list-group-item" href="#">
-      {{ category.name }}<span class="badge badge-pill float-right text-white" v-bind:class="getBadgeColor">{{ category.num_posts }}</span>
-    </a>
+    <div v-for="category in categories" v-bind:key="category.id">
+      <router-link :to="{ name:'top' ,  query: { keyword :category.name }  }" class="list-group-item" >
+        {{ category.name }}<span class="badge badge-pill float-right text-white" v-bind:class="getBadgeColor">{{ category.num_posts }}</span>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -27,7 +29,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/category/", {})
+      .get("http://" + this.$store.getters.domain + "/api/category/", {})
       .then(res => {
         this.categories = res.data.results;
       })

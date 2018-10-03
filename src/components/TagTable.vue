@@ -1,13 +1,15 @@
 <template>
-  <b-table  :items="items">
-    <template slot="All Tags " slot-scope="data">
-      <a :href="`#${data.value.replace(/[^a-z]+/i,'-').toLowerCase()}`">
-        {{data.value}}
-      </a>
-    </template>
-  </b-table>
-</template>
-
+  <table class="table">
+    <tbody>
+      <tr v-for="item in items" v-bind:key="item.id">
+        <td>
+          <router-link :to="{ name:'top' ,  query: { keyword :item.name }  }" >
+            {{item.allname}}
+          </router-link>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <script>
@@ -29,7 +31,7 @@ export default {
       .get("http://" + this.$store.getters.domain + "/api/tag/", {})
       .then(res => {
         this.items = res.data.results.map((tag)=>{
-          return {"All Tags ": tag.name + " (" + tag.num_posts + ")"}
+          return {"id": tag.id, "allname": tag.name + " (" + tag.num_posts + ")" , "name": tag.name}
         });
       })
       .catch(res => {

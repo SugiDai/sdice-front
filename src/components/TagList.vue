@@ -4,9 +4,9 @@
     Tag
   </a>
   <div v-for="tag in tags" v-bind:key="tag.id">
-  <router-link :to="{ name:'top' ,  query: { keyword :tag.name }  }" class="list-group-item" >
-    {{ tag.name }}<span class="badge badge-pill float-right text-white" v-bind:class="getBadgeColor">{{ tag.num_posts }}</span>
-  </router-link>
+    <router-link :to="{ name:'top' ,  query: { keyword :tag.name }  }" class="list-group-item" >
+      {{ tag.name }}<span class="badge badge-pill float-right text-white" v-bind:class="getBadgeColor">{{ tag.num_posts }}</span>
+    </router-link>
   </div>
   <router-link :to="{ name:'tagtable' }" class="list-group-item" > >>> 全てのタグを見る </router-link>
 </div>
