@@ -23,7 +23,7 @@ export default {
   },
   mounted () {
     axios
-      .get('http://localhost:8000/api/link/',{})
+      .get('http://' + this.$store.getters.domain + '/api/link/',{})
       .then((res)=>{
         this.links = res.data.results
       })

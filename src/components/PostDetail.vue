@@ -34,7 +34,7 @@
         <div class="card-footer">
           <p>添付ファイル</p>
           <div v-for="file in file_list" v-bind:key=" file.id">
-            <a v-bind:href="file.src">{{ file.title }} - {{ file.name }}</a><br>
+            <a v-bind:href="file.src" v-bind:download="file.name">{{ file.title }} - {{ file.name }}</a><br>
           </div>
         </div>        
         
@@ -85,7 +85,7 @@ export default {
   methods:{
     getfile:function(id_list){
       id_list.forEach(id => {
-        axios.get('http://localhost:8000/api/file/' + id, {} )
+        axios.get('http://' + this.$store.getters.domain + '/api/file/' + id, {} )
           .then((res)=>{
             var data = res.data;
             var src = res.data.src;

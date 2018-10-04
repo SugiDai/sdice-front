@@ -63,7 +63,7 @@ export default {
       // 下部の位置
       var content_max = window.document.documentElement.scrollHeight;
       
-      if ((scroll + content_height) >= content_max && !this.max_flg) {
+      if ((scroll + content_height ) >= content_max && !this.max_flg) {
         this.fetch();
       }
     },
