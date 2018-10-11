@@ -34,12 +34,14 @@
       </div>
       <br>
       <hr>
+      <p class="description" >{{ post.description }}</p>
       <router-link :to="{ name:'post', params : { id: post.pk } }" class="btn btn-outline-primary btn-lg btn-block" > 続きを読む</router-link>
       <br>
-
+      <!--      
       <div v-if="user.is_authenticated">
         <a v-bind:href="post.pk">管理画面へ</a>
       </div>
+      -->
     </div>
 
   </div><!-- card-body終了 -->
@@ -85,5 +87,12 @@ export default {
 .tag-blox {
   padding: 1px;
   float: left;
+}
+
+.description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
 }
 </style>

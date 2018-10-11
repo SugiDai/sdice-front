@@ -6,10 +6,11 @@ import PostDetail from '@/components/PostDetail'
 import CommentForm from '@/components/CommentForm'
 import ReCommentForm from '@/components/ReCommentForm'
 import TagTable from '@/components/TagTable'
+import store from "../store"
 
 Vue.use(Router)
 
-export default new Router({
+const router =  new Router({
   routes: [
     {
       path: '/',
@@ -54,3 +55,18 @@ export default new Router({
     return { x: 0, y: 200 }
   }  
 })
+
+router.beforeEach((to, from, next) => {
+  // console.log("start");
+  // var store = this.a.app.$options.store;
+  store.commit('start')
+  setTimeout(()=>{next()},500)
+})
+
+router.afterEach((to, from) => {
+  // console.log("end");
+  // var store = this.a.app.$options.store;
+  store.commit('end')
+})
+
+export default router;

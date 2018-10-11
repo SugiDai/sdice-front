@@ -5,10 +5,10 @@
     <div class="row">
       <listheader title="記事一覧" />
     </div>
-
+        <viewloading/>
     <div class="row">
       <main class="col-12 col-md-8 ">
-        <router-view/>
+        <router-view />
       </main>
 
       <!-- 右側のサイドバー -->
@@ -42,16 +42,26 @@
 
 
 <script>
-import jumbotron from './Jumbotron.vue';
-import listheader from './ListHeader.vue';
-import categorylist from './CategoryList.vue';
-import taglist from './TagList.vue';
-import linklist from './LinkList.vue';
-import commentlist from './CommentList.vue';
-import authfooter from './Footer.vue';
+import jumbotron from "./Jumbotron.vue";
+import listheader from "./ListHeader.vue";
+import categorylist from "./CategoryList.vue";
+import taglist from "./TagList.vue";
+import linklist from "./LinkList.vue";
+import commentlist from "./CommentList.vue";
+import authfooter from "./Footer.vue";
+import viewloading from "./ViewLoading.vue";
 
 export default {
-  name: 'layout',
-  components: { jumbotron, listheader, categorylist, taglist, linklist, commentlist ,authfooter},
-}
+  name: "layout",
+  components: {
+    jumbotron,
+    listheader,
+    categorylist,
+    taglist,
+    linklist,
+    commentlist,
+    authfooter,
+    viewloading
+  }
+};
 </script>

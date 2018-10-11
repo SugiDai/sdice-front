@@ -12,26 +12,25 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  name: 'linklist',
-  data () {
+  name: "linklist",
+  data() {
     return {
-      links: [],
-    }
+      links: []
+    };
   },
-  mounted () {
+  mounted() {
     axios
-      .get('http://' + this.$store.getters.domain + '/api/link/',{})
-      .then((res)=>{
-        this.links = res.data.results
+      .get("http://" + this.$store.getters.domain + "/api/link/", {})
+      .then(res => {
+        this.links = res.data.results;
       })
-      .catch((res)=>{
-        console.log(res)
+      .catch(res => {
+        console.log(res);
       });
-    this.$store.commit('setListTitle', "/ 一覧 " );
-  },
-
-}
+    this.$store.commit("setListTitle", "/ 一覧 ");
+  }
+};
 </script>

@@ -6,12 +6,12 @@
 
 <script>
 export default {
-  name: 'listheader',
-  props: ['title'],
-  data () {
+  name: "listheader",
+  props: ["title"],
+  data() {
     return {
-        msg:"duammy",
-    }
-  },
-}
+      msg: "duammy"
+    };
+  }
+};
 </script>

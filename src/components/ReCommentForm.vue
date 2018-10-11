@@ -36,48 +36,52 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  name: 'recommentform',
+  name: "recommentform",
   props: { commentid: Number, postid: Number },
-  data () {
+  data() {
     return {
       form: {
-        name: '',
-        text: '',
-        icon: null,
+        name: "",
+        text: "",
+        icon: null
       },
       show: true
-    }
+    };
   },
   methods: {
-    onSubmit (evt) {
+    onSubmit(evt) {
       evt.preventDefault();
       let comment_id = this.$route.query.commentid;
       let post_id = this.$route.query.postid;
-      let data = new FormData;
-      data.append('target', comment_id);
-      data.append('name', this.form.name);
-      data.append('text', this.form.text);
-      if( this.form.icon != null ){
-        data.append('icon', this.form.icon);
+      let data = new FormData();
+      data.append("target", comment_id);
+      data.append("name", this.form.name);
+      data.append("text", this.form.text);
+      if (this.form.icon != null) {
+        data.append("icon", this.form.icon);
       }
-      axios.post('http://' + this.$store.getters.domain + '/api/recomment/', data).then((res)=>{
-        alert("Add ReComment .");
-        this.$router.push({ name: 'post', params: { id: post_id }});
-      });
+      axios
+        .post("http://" + this.$store.getters.domain + "/api/recomment/", data)
+        .then(res => {
+          alert("Add ReComment .");
+          this.$router.push({ name: "post", params: { id: post_id } });
+        });
     },
-    onReset (evt) {
+    onReset(evt) {
       evt.preventDefault();
       /* Reset our form values */
-      this.form.name = '';
-      this.form.text = '';
+      this.form.name = "";
+      this.form.text = "";
       this.form.icon = null;
 
       /* Trick to reset/clear native browser form validation state */
       this.show = false;
-      this.$nextTick(() => { this.show = true });
+      this.$nextTick(() => {
+        this.show = true;
+      });
     }
   }
-}
+};
 </script>

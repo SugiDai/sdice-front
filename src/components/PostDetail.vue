@@ -51,88 +51,108 @@
 </template>
 
 <script>
-import listcard from './ListCard.vue';
-import page from './Page.vue';
-import axios from 'axios';
-import detailcomment from './DetailComment.vue';
-import vuemarkdown from 'vue-markdown'
+import listcard from "./ListCard.vue";
+import page from "./Page.vue";
+import axios from "axios";
+import detailcomment from "./DetailComment.vue";
+import vuemarkdown from "vue-markdown";
+
+function api(url) {
+  const params = {};
+  return new Promise((resolve, reject) => {
+    axios
+      .get(url, params)
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(res => {
+        reject(res.data);
+      });
+  });
+}
 
 export default {
-  name: 'taglist',
+  name: "taglist",
   props: { id: Number },
-  data () {
+  data() {
     return {
-      commentform:[],
+      commentform: [],
       post: {},
       category: {},
-      toc:true,
-      file_list:[],
-    }
+      toc: true,
+      file_list: []
+    };
   },
   computed: {
-    getBadgeColor:function(){
+    getBadgeColor: function() {
       return this.$store.getters.badgecolor;
     },
-    getCreatedAtStr:function(){
+    getCreatedAtStr: function() {
       var dt = new Date(Date.parse(this.post.created_at));
       var y = dt.getFullYear();
-      var m = ("00" + (dt.getMonth()+1)).slice(-2);
+      var m = ("00" + (dt.getMonth() + 1)).slice(-2);
       var d = ("00" + dt.getDate()).slice(-2);
-      var result = y + "年" + m + "月" + d  + "日";
+      var result = y + "年" + m + "月" + d + "日";
       return result;
-    },
-  },
-  methods:{
-    getfile:function(id_list){
-      id_list.forEach(id => {
-        axios.get('http://' + this.$store.getters.domain + '/api/file/' + id, {} )
-          .then((res)=>{
-            var data = res.data;
-            var src = res.data.src;
-            data.name = src.split('/').pop();
-            this.file_list.push(data);
-        });        
-      });
     }
   },
-  mounted () {
-    axios
-      .get('http://' + this.$store.getters.domain + '/api/post/' + this.$route.params.id, {} )
-      .then((res)=>{
-        this.post = res.data;
-        this.category = res.data.category;
-        this.$store.commit('setListTitle', "/ 一覧 / " + this.category.name + "/" + res.data.title );
-        this.getfile(this.post.files)
-      }).catch((res)=>{
-        console.log(res);
+  methods: {
+    getfile: function(id_list) {
+      id_list.forEach(id => {
+        axios
+          .get("http://" + this.$store.getters.domain + "/api/file/" + id, {})
+          .then(res => {
+            var data = res.data;
+            data.name = res.data.src.split("/").pop();
+            this.file_list.push(data);
+          });
       });
+    },
+    async fetch(id) {
+      console.log(id);
+      var url = "http://" + this.$store.getters.domain + "/api/post/" + id;
+      this.post = await api(url);
+      this.category = this.post.category;
+      this.$store.commit(
+        "setListTitle",
+        "/ 一覧 / " + this.category.name + "/" + this.post.title
+      );
+      this.getfile(this.post.files);
+    }
   },
-  components: { listcard, page, vuemarkdown, detailcomment },
-}
+  watch: {
+    "$route.params.id"() {
+      this.fetch(this.$route.params.id);
+    }
+  },
+  mounted() {
+    this.fetch(this.$route.params.id);
+  },
+  components: { listcard, page, vuemarkdown, detailcomment }
+};
 </script>
 
 <style>
-	.markdown-body {
-		box-sizing: border-box;
-		min-width: 200px;
-		max-width: 980px;
-		margin: 0 auto;
-		padding: 25px;
-	}
+.markdown-body {
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 25px;
+}
 
-	@media (max-width: 767px) {
-		.markdown-body {
-			padding: 10px;
-		}
-	}
-
-  .tag-blox {
-    padding:0.5px;
-    float: left;
+@media (max-width: 767px) {
+  .markdown-body {
+    padding: 10px;
   }
+}
 
-  .toc-pad {    
-    padding:10px;
-  }
+.tag-blox {
+  padding: 0.5px;
+  float: left;
+}
 
+.toc-pad {
+  padding: 10px;
+}
 </style>

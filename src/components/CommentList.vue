@@ -13,28 +13,28 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  name: 'linklist',
-  data () {
+  name: "linklist",
+  data() {
     return {
-      comments: [],
-    }
+      comments: []
+    };
   },
   computed: {
-    getBadgeColor:function(){
+    getBadgeColor: function() {
       return this.$store.getters.badgecolor;
     }
   },
-  mounted () {
+  mounted() {
     axios
-      .get('http://localhost:8000/api/comment/',{})
-      .then((res)=>{
-        this.comments = res.data.results
-      }).catch((res)=>{
-        console.log(res)
+      .get("http://" + this.$store.getters.domain + "/api/comment/", {})
+      .then(res => {
+        this.comments = res.data.results;
+      })
+      .catch(res => {
+        console.log(res);
       });
-  },
-
-}
+  }
+};
 </script>
