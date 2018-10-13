@@ -5,12 +5,12 @@
     <div class="row">
       <listheader title="記事一覧" />
     </div>
-        <viewloading/>
+    <returntop/>
+    <viewloading/>
     <div class="row">
       <main class="col-12 col-md-8 ">
         <router-view />
       </main>
-
       <!-- 右側のサイドバー -->
       <aside class="col-12 col-md-3 offset-md-1 ">
         <!-- カテゴリ一覧 -->
@@ -50,6 +50,7 @@ import linklist from "./LinkList.vue";
 import commentlist from "./CommentList.vue";
 import authfooter from "./Footer.vue";
 import viewloading from "./ViewLoading.vue";
+import returntop from "./ReturnTop.vue";
 
 export default {
   name: "layout",
@@ -61,7 +62,8 @@ export default {
     linklist,
     commentlist,
     authfooter,
-    viewloading
+    viewloading,
+    returntop
   }
 };
 </script>

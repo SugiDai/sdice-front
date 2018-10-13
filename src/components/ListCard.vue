@@ -1,4 +1,6 @@
 <template>
+<transition name="lcard">
+
 <div class="mb-5 card">
 
   <div class="card-header" v-bind:class="this.$store.getters.bgcolor">
@@ -47,6 +49,7 @@
   </div><!-- card-body終了 -->
 
 </div>
+</transition>
 </template>
 
 <script>
@@ -94,5 +97,15 @@ export default {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 5;
   overflow: hidden;
+}
+
+.lcard-enter-active,
+.lcard-leave-active {
+  transition: opacity 1s;
+}
+
+.lcard-enter,
+.lcard-leave-to {
+  opacity: 0;
 }
 </style>

@@ -21,7 +21,9 @@
       </b-navbar>
     </header>
     <main>
-      <router-view/>
+      <transition name="appt">
+        <router-view/>
+      </transition>
     </main>
   </div>
 </template>
@@ -56,3 +58,12 @@ export default {
   }
 };
 </script>
+
+<style>
+.appt-enter-active, .appt-leave-active{
+    transition: opacity 1s;
+}
+.appt-enter, .appt-leave-to {
+    opacity: 0;
+}
+</style>
