@@ -6,7 +6,7 @@ import PostDetail from '@/components/PostDetail'
 import CommentForm from '@/components/CommentForm'
 import ReCommentForm from '@/components/ReCommentForm'
 import TagTable from '@/components/TagTable'
-import store from "../store"
+import store from "../stores"
 
 Vue.use(Router)
 

@@ -72,7 +72,7 @@ export default {
       return this.$store.getters.badgecolor;
     },
     getThumnail() {
-      return "http://" + this.$store.getters.domain + this.post.thumnail;
+      return process.env.PROTOCOL + this.$store.getters.domain + this.post.thumnail;
     },
     getCreatedAtStr: function() {
       var dt = new Date(Date.parse(this.post.created_at));

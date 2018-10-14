@@ -23,7 +23,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://" + this.$store.getters.domain + "/api/link/", {})
+      .get(process.env.PROTOCOL + this.$store.getters.domain + "/api/link/", {})
       .then(res => {
         this.links = res.data.results;
       })

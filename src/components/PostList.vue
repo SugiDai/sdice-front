@@ -48,7 +48,7 @@ export default {
 
   methods: {
     async fetch() {
-      this.apiurl = "http://" + this.$store.getters.domain + "/api/post/";
+      this.apiurl = process.env.PROTOCOL + this.$store.getters.domain + "/api/post/";
       const items = await api(this.apiurl, this.page, this.keyword);
       if (items.length == 0) {
         this.max_flg = true;

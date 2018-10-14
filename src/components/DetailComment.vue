@@ -39,7 +39,7 @@ export default {
   },
   methods:{
     getImageUrl: function(page){
-      return "http://" + this.$store.getters.domain + page;
+      return process.env.FILE_ENDPOINT + page;
     },
     getCreatedAtStr: function(created_at) {
       var dt = new Date(Date.parse(created_at));

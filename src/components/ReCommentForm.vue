@@ -63,7 +63,7 @@ export default {
         data.append("icon", this.form.icon);
       }
       axios
-        .post("http://" + this.$store.getters.domain + "/api/recomment/", data)
+        .post(process.env.PROTOCOL + this.$store.getters.domain + "/api/recomment/", data)
         .then(res => {
           alert("Add ReComment .");
           this.$router.push({ name: "post", params: { id: post_id } });

@@ -100,7 +100,7 @@ export default {
     getfile: function(id_list) {
       id_list.forEach(id => {
         axios
-          .get("http://" + this.$store.getters.domain + "/api/file/" + id, {})
+          .get(process.env.FILE_ENDPOINT + "/api/file/" + id, {})
           .then(res => {
             var data = res.data;
             data.name = res.data.src.split("/").pop();
@@ -109,8 +109,7 @@ export default {
       });
     },
     async fetch(id) {
-      console.log(id);
-      var url = "http://" + this.$store.getters.domain + "/api/post/" + id;
+      var url = process.env.PROTOCOL + this.$store.getters.domain + "/api/post/" + id;
       this.post = await api(url);
       this.category = this.post.category;
       this.$store.commit(

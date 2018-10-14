@@ -34,8 +34,10 @@ export default {
   mounted() {
     axios
       .get(
-        "http://" +
-          this.$store.getters.domain + "/api/recomment/?comment=" + this.commentid,
+        process.env.PROTOCOL +
+          this.$store.getters.domain +
+          "/api/recomment/?comment=" +
+          this.commentid,
         {}
       )
       .then(res => {
@@ -58,7 +60,7 @@ export default {
   computed: {
     getBadgeColor: function() {
       return this.$store.getters.badgecolor;
-    },
+    }
   }
 };
 </script>

@@ -54,21 +54,13 @@ const initialState = {
   
     actions: {
       getSite({ dispatch }) {
-        return axios.get('http://localhost:8000/api/site', {})
+        return axios.get(process.env.API_SITE_ENDPOINT, {})
       },
   
       // メッセージを API からGET
       getSiteDetail({ dispatch }) {
-        return axios.get('http://localhost:8000/api/sitedetaile/', {})
-        // .then(function(res){
-        //   store.commit('setSitedetail', res.data )
-        // }).catch(function(res){
-        //   console.log(res)
-        // })
+        return axios.get(process.env.SITE_SITE_DETAIL, {})
       },
-      // saveMessage({commit, state}) {
-      //   axios.put('/api/message', { message: state.message })
-      // },
     },
     getters: {
       domain(state) { return state.domain },

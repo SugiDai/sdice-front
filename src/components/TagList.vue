@@ -29,7 +29,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://" + this.$store.getters.domain + "/api/tag/", {})
+      .get(process.env.PROTOCOL + this.$store.getters.domain + "/api/tag/", {})
       .then(res => {
         this.tags = res.data.results;
       })
