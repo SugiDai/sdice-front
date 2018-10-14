@@ -8,6 +8,7 @@
           <b-navbar-nav>
             <b-nav-item href="/">Home</b-nav-item>
             <b-nav-item :to="{ name:'tagtable' }" > All Tag </b-nav-item>
+            <b-nav-item :to="{ name:'profile' }" > My Profile </b-nav-item>
             <!-- <b-nav-item href="#">Feed</b-nav-item> -->
           </b-navbar-nav>
           <!-- Right aligned nav items -->

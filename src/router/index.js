@@ -6,6 +6,8 @@ import PostDetail from '@/components/PostDetail'
 import CommentForm from '@/components/CommentForm'
 import ReCommentForm from '@/components/ReCommentForm'
 import TagTable from '@/components/TagTable'
+import Profile from '@/components/Profile'
+
 import store from "../stores"
 
 Vue.use(Router)
@@ -20,7 +22,6 @@ const router =  new Router({
           path: '',
           component: PostList,
         },
-
         {
           name: "top",
           path: 'top',
@@ -48,6 +49,12 @@ const router =  new Router({
           query: 'postid=:postid&commendid=:commendid',
           component: ReCommentForm
         },
+        {
+          name: "profile",
+          path: 'profile',
+          component: Profile
+        },
+
       ]
     }
   ],
@@ -57,15 +64,11 @@ const router =  new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  // console.log("start");
-  // var store = this.a.app.$options.store;
   store.commit('start')
   setTimeout(()=>{next()},500)
 })
 
 router.afterEach((to, from) => {
-  // console.log("end");
-  // var store = this.a.app.$options.store;
   store.commit('end')
 })
 
