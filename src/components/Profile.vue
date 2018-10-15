@@ -1,15 +1,17 @@
 <template>
-<div class="profile_card">
-    <div class="profile_box">
-        <img v-bind:src="profile.profile_image" class="profile_icon">
-        <div>
-            <p class="profile_title">プロフィール</p>
-            <p class="profile_name">{{profile.profile_name }}</p>
-        </div>
-    </div>
-    <p class="content">{{profile.introduction}}</p>
-    <p class="content"><vuemarkdown :source="profile.description" toc-anchor-link-symbol=">"></vuemarkdown></p>
-</div>
+<transition name="pcard">
+  <div class="profile_card">
+      <div class="profile_box">
+          <img v-bind:src="profile.profile_image" class="profile_icon">
+          <div>
+              <p class="profile_title">プロフィール</p>
+              <p class="profile_name">{{profile.profile_name }}</p>
+          </div>
+      </div>
+      <p class="content">{{profile.introduction}}</p>
+      <p class="content"><vuemarkdown :source="profile.description" toc-anchor-link-symbol=">"></vuemarkdown></p>
+  </div>
+</transition>
 </template>
 
 <script>
@@ -98,6 +100,16 @@ export default {
   color: #666;
   background: transparent; /*背景透明に*/
   border-left: solid 5px #7db4e6; /*左線*/
+}
+
+.pcard-enter-active,
+.pcard-leave-active {
+  transition: opacity 1s;
+}
+
+.pcard-enter,
+.pcard-leave-to {
+  opacity: 0;
 }
 
 </style>

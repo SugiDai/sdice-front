@@ -1,55 +1,40 @@
 <template>
-<transition name="lcard">
-
-<div class="mb-5 card">
-
-  <div class="card-header" v-bind:class="this.$store.getters.bgcolor">
-    <h1 class="card-title text-white">{{ post.title }}</h1>
-  </div><!-- card-header終了 -->
-
-  <div class="card-body row">
-    <!-- card-bodyの左側 -->
-    <div class="col-xs-12 col-sm-6 text-center">
-      <div v-if="post.thumnail">
-        <b-img thumbnail fluid v-bind:src="getThumnail" v-bind:alt="post.title" />
+  <transition name="lcard">
+    <div class="card-deck">
+      <div class="mb-4 card">
+        <div class="card-body row">
+          <div class="col-xs-12 col-sm-6 text-center">
+            <div v-if="post.thumnail">
+              <b-img thumbnail fluid v-bind:src="getThumnail" v-bind:alt="post.title" />
+            </div>
+            <div v-else>
+              <b-img src="./static/no_image.svg" fluid-grow alt="post.title" />
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <h4 class="card-title">{{ post.title }}</h4>
+            <span class="badge badge-pill" v-bind:class="this.$store.getters.badgecolor">{{ post.days_since_joined }}</span>
+            <span class="badge badge-pill" v-bind:class="this.$store.getters.badgecolor">{{ getCreatedAtStr }}</span>
+            <br>
+            <span class="badge" v-bind:class="this.$store.getters.badgecolor">
+              <a class="text-white" b-bind:href="post.category.name">{{ post.category.name }}</a>
+            </span>
+            <br>
+            <div class='tag-blox' v-for="item in post.tag" v-bind:key="item">
+              <span class="badge" v-bind:class="getBadgeColor">
+                <a class="text-white" v-bind:href="item">{{ item }}</a>
+              </span>
+            </div>
+            <br>
+            <hr>
+            <p class="post-description" >{{ post.description }}</p>
+            <router-link :to="{ name:'post', params : { id: post.pk } }" class="btn btn-outline-primary btn-lg btn-block" > 続きを読む</router-link>
+            <br>
+          </div>
+        </div>
       </div>
-      <div v-else>
-        <b-img src="./static/no_image.svg" fluid-grow alt="post.title" />
-      </div>
-    </div><!-- card-bodyの左側終わり -->
-
-    <!-- card-bodyの右側 -->
-    <div class="col-xs-12 col-sm-6">
-      <span class="badge badge-pill" v-bind:class="this.$store.getters.badgecolor">{{ post.days_since_joined }}</span>
-      <span class="badge badge-pill" v-bind:class="this.$store.getters.badgecolor">{{ getCreatedAtStr }}</span>
-      <br>
-
-      <span class="badge" v-bind:class="this.$store.getters.badgecolor">
-        <a class="text-white" b-bind:href="post.category.name">{{ post.category.name }}</a>
-      </span>
-      <br>
-
-      <div class='tag-blox' v-for="item in post.tag" v-bind:key="item">
-        <span class="badge" v-bind:class="getBadgeColor">
-          <a class="text-white" v-bind:href="item">{{ item }}</a>
-        </span>
-      </div>
-      <br>
-      <hr>
-      <p class="description" >{{ post.description }}</p>
-      <router-link :to="{ name:'post', params : { id: post.pk } }" class="btn btn-outline-primary btn-lg btn-block" > 続きを読む</router-link>
-      <br>
-      <!--      
-      <div v-if="user.is_authenticated">
-        <a v-bind:href="post.pk">管理画面へ</a>
-      </div>
-      -->
     </div>
-
-  </div><!-- card-body終了 -->
-
-</div>
-</transition>
+  </transition>
 </template>
 
 <script>
@@ -72,7 +57,9 @@ export default {
       return this.$store.getters.badgecolor;
     },
     getThumnail() {
-      return process.env.PROTOCOL + this.$store.getters.domain + this.post.thumnail;
+      return (
+        process.env.PROTOCOL + this.$store.getters.domain + this.post.thumnail
+      );
     },
     getCreatedAtStr: function() {
       var dt = new Date(Date.parse(this.post.created_at));
@@ -87,6 +74,26 @@ export default {
 </script>
 
 <style>
+.card-body h4 {
+  font-size: 100%;
+  text-align: left;
+  padding: 0.25em 0.5em;
+  color: #666;
+  background: transparent;
+  border-left: solid 5px #7db4e6;
+}
+
+.post-description {
+  font-size: 80%;
+  text-align: left;
+  color: #666;
+  background: transparent;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+}
+
 .tag-blox {
   padding: 1px;
   float: left;
