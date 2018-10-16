@@ -2,18 +2,22 @@
   <div>
     <div v-for="comment in comments" v-bind:key="comment.id">
       <div class="row mt-3">
+        <!--
         <div v-if="comment.icon" class="col-md-2 d-none d-md-block">
             <b-img thumbnail fluid class="img-fluid lazy" v-bind:src="getImageUrl(comment.icon)" v-bind:alt="comment.name" />
         </div>
         <div v-else class="col-md-2 d-none d-md-block">
-            <b-img thumbnail fluid class="img-fluid lazy" src="./static/no_image.svg" v-bind:alt="comment.name" />
+          <b-img thumbnail fluid class="img-fluid lazy" src="./static/no_image.svg" v-bind:alt="comment.name" />
         </div>
+        -->
         <div class="col-md-10">
             <h5>
               {{ comment.name }}
               <span class="badge badge-pill" v-bind:class="getBadgeColor" >{{ comment.days_since_joined}}</span>
               <span class="badge badge-pill" v-bind:class="getBadgeColor" >{{ getCreatedAtStr(comment.created_at)}}</span>
+              <!--
               <router-link :to="{ name:'recommentform', query:{ postid:comment.target, commentid:comment.id } }" >返信する</router-link>
+              -->
             </h5>
             <div v-for="file in comment.files" v-bind:key="file.pk">
               <a href="#">添付ファイルダウンロード()</a><br>

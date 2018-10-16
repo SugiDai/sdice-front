@@ -38,7 +38,7 @@
     <div id="comment-area">
       <detailcomment v-bind:comments="post.comments"></detailcomment>
     </div>
-    <div class="text-center my-5">
+    <div class="text-center my-5" v-show="post.comments.length <= 10">
       <router-link :to="{ name:'commentform', params:{ 'id':post.pk }}" class="btn btn-lg text-white" v-bind:class="this.$store.getters.bgcolor" >コメントページへ</router-link>
     </div>
 </div>

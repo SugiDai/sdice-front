@@ -2,12 +2,14 @@
   <div>
     <div v-for="recomment in recomments" v-bind:key="recomment.id">
       <div class="row mt-3">
+        <!--
         <div v-if="recomment.icon" class="col-md-2 d-none d-md-block">
             <b-img thumbnail fluid class="img-fluid lazy" v-bind:src="recomment.icon" v-bind:alt="recomment.name" />
         </div>
         <div v-else class="col-md-2 d-none d-md-block">
             <b-img thumbnail fluid class="img-fluid lazy" src="./static/no_image.svg" v-bind:alt="recomment.name" />
         </div>
+        -->
         <div class="col-md-10">
             <h5>
               {{ recomment.name }}
