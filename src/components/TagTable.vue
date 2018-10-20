@@ -28,7 +28,7 @@ export default {
   mounted() {
     this.$store.commit('setListTitle', "/ 一覧 / 全てのタグを見る /" );
     axios
-      .get(process.env.PROTOCOL + this.$store.getters.domain + "/api/tag/", {})
+      .get(process.env.API_END_POINT + "/tag/", {})
       .then(res => {
         this.items = res.data.results.map((tag)=>{
           return {"id": tag.id, "allname": tag.name + " (" + tag.num_posts + ")" , "name": tag.name}

@@ -41,7 +41,7 @@ export default {
   methods: {
     async fetch() {
       this.apiurl =
-        process.env.PROTOCOL + this.$store.getters.domain + "/api/profile/1/";
+        process.env.FILE_ENDPOINT + "/profile/1/";
       this.profile = await api(this.apiurl);
     }
   },

@@ -29,7 +29,7 @@ export default {
   },
   mounted() {
     axios
-      .get(process.env.PROTOCOL + this.$store.getters.domain + "/api/category/", {})
+      .get(process.env.API_END_POINT + "/category/", {})
       .then(res => {
         this.categories = res.data.results;
       })

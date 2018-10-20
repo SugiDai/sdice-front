@@ -61,7 +61,7 @@ export default {
       if( this.form.icon != null ){
         data.append('icon', this.form.icon);
       }
-      axios.post(process.env.PROTOCOL + this.$store.getters.domain + '/api/comment/', data).then((res)=>{
+      axios.post(process.env.API_END_POINT + '/comment/', data).then((res)=>{
         alert("Add Comment.");
         this.$router.push({ name: 'post', params: { id: post_id }});
       });

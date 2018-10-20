@@ -35,11 +35,7 @@ export default {
   },
   mounted() {
     axios
-      .get(
-        process.env.PROTOCOL +
-          this.$store.getters.domain +
-          "/api/recomment/?comment=" +
-          this.commentid,
+      .get(process.env.API_END_POINT + "/recomment/?comment=" + this.commentid,
         {}
       )
       .then(res => {

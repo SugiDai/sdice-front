@@ -1,8 +1,9 @@
 'use strict'
 module.exports = {
   NODE_ENV: '"production"',
-  PROTOCOL:'"http://"',
-  API_SITE_ENDPOINT: '"http://localhost:8000/api/site"',
-  SITE_SITE_DETAIL: '"http://localhost:8000/api/sitedetaile/"',
-  FILE_ENDPOINT: '"http://localhost:8000"',
+  PROTOCOL:'"https://"',
+  API_END_POINT: '"https://www.sdicesoft.com/api"',
+  API_SITE_ENDPOINT: '"https://www.sdicesoft.com/api/site"',
+  SITE_SITE_DETAIL: '"https://www.sdicesoft.com/api/sitedetaile/"',
+  FILE_ENDPOINT: '"https://www.sdicesoft.com"',
 }

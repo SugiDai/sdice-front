@@ -8,7 +8,7 @@
               <b-img thumbnail fluid v-bind:src="getThumnail" v-bind:alt="post.title" />
             </div>
             <div v-else>
-              <b-img src="./static/no_image.svg" fluid-grow alt="post.title" />
+              <b-img src="./no_image.svg" fluid-grow alt="post.title" />
             </div>
           </div>
           <div class="col-xs-12 col-sm-6">
@@ -57,9 +57,7 @@ export default {
       return this.$store.getters.badgecolor;
     },
     getThumnail() {
-      return (
-        process.env.PROTOCOL + this.$store.getters.domain + this.post.thumnail
-      );
+      return (this.post.thumnail);
     },
     getCreatedAtStr: function() {
       var dt = new Date(Date.parse(this.post.created_at));
